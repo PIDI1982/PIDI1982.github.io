@@ -228,15 +228,8 @@ body .container #sharkit {
 
 body .container #sharkit .second_step {
   position: absolute;
-  top: 65%;
-  left: calc(50% - 100px);
-}
-
-@media screen and (max-width: 768px) {
-  body .container #sharkit .second_step {
-    -webkit-transform: translateY(90%);
-            transform: translateY(90%);
-  }
+  top: 33%;
+  left: 25%;
 }
 
 body .container #content_1 {

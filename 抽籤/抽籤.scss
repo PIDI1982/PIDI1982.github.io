@@ -219,10 +219,10 @@ body {
       filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="", sizingMethod='scale');
       .second_step {
         position: absolute;
-        top: 65%;
-        left: calc(50% - 100px);
+        top: 33%;
+        left: 25%;
         @media screen and (max-width: 768px) {
-          transform: translateY(90%);
+          // transform: translateY(90%);
         }
       }
     }
