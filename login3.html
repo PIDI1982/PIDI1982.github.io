@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap
+        {
+            position:absolute;
+            left:100px;
+            top:260px;
+        }
+        #ch_img{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div  id="wrap">    
+        帳號:<input type=text id="post_name" value="3310931029"><br>    密碼:<input type=password id="pswd" value="1234"><br>
+    輸入驗證碼:<input type=text id="chkword"><br>    驗證碼:<span id="ch"></span><br>
+   
+    <span id="ch_img"></span><br>
+    <canvas id="canvas" width="180" height="60"></canvas>
+    <input type=button  id="sent" value="送出" onclick="check()" ><br> 
+    <input type="button" onclick="drawPic()" value="看不清，換一張">      
+    </div> 
+    
+    <script>       
+        function check()
+        {
+            pass_flg="yes";
+            name=document.getElementById("post_name").value;
+           // alert(name)
+            l=name.length;
+            if (l==0)
+            {
+                alert("帳號不能為空字串") 
+                pass_flg="no"; 
+            }
+            paswd=document.getElementById("pswd").value;
+           // alert(name)
+            l=paswd.length;
+            if (l==0)
+            {
+                alert("密碼不能為空字串") 
+                pass_flg="no"; 
+            }
+            ans=document.getElementById("ch").innerText;  //系統產生的驗證碼
+            user_in=document.getElementById("chkword").value;   //使用者輸入的
+            if (ans!=user_in)
+            {
+                alert("驗證碼不對" + user_in) 
+                pass_flg="no";            
+            } 
+            let result = null;
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "user.txt", false); /*更改系統Menu時要特別注意路徑  */
+            xmlhttp.send();
+            if (xmlhttp.status==200) {
+                 result = xmlhttp.responseText;
+                alert( result);
+                 arr = result.split(',');
+                if (arr[0]!=name) 
+                {
+                    pass_flg="no";
+                    alert("帳號不對" + name) 
+                }
+                if (arr[1]!=paswd)
+                {
+                    pass_flg="no";
+                    alert("密碼不對" + name) 
+                }
+            }
+            if (pass_flg=="yes")
+            {
+                alert( "身分正確,可以跳到其他網頁")
+                window.location.href="act2.htm"   //跳到其他網頁
+            }             
+        }   
+        let chk=[];    //宣告陣列
+        for (i=0;i<4;i++)
+        {
+            chk[i]=Math.floor(Math.random()*10);  //Math.random() 0-1的實數  Math.random()*10 0-10 間的實數(不含10)
+        }
+        ans=""; ans_img="";
+        for (i=0;i<4;i++)
+        {
+            ans=ans+chk[i];
+            if (chk[i]==0)
+            {        
+                ans_img+="<img src='img/10.gif' width=20 >"        }
+            else
+            {        
+                ans_img+="<img src='img/"+chk[i]+".gif' width=20 >"        }
+        }
+//    alert(ans_img);  
+</script>
+</body>
+</html>
